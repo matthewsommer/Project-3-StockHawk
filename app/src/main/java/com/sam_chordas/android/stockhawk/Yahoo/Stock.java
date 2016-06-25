@@ -15,8 +15,9 @@ public class Stock implements Parcelable {
     private String is_up;
     private String is_current;
 
-    public Stock(String id) {
-        this.id = id;
+    public Stock(String id, String symbol) {
+        setId(id);
+        setSymbol(symbol);
     }
 
     public int describeContents() {
@@ -24,7 +25,8 @@ public class Stock implements Parcelable {
     }
 
     public void writeToParcel(Parcel out, int flags) {
-        out.writeString(id);
+        out.writeString(getId());
+        out.writeString(getSymbol());
     }
 
     public static final Parcelable.Creator<Stock> CREATOR
@@ -39,12 +41,12 @@ public class Stock implements Parcelable {
     };
 
     private Stock(Parcel in) {
-        id = in.readString();
+        setId(in.readString());
+        setSymbol(in.readString());
     }
 
     public List<Stock> FetchRemoteStocks() {
-        String responseStr = Client.FetchStockData();
-        return Utility.ParseResponseStr(responseStr);
+        return null;
     }
 
     public String getId() {

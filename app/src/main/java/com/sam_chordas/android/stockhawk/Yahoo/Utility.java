@@ -24,4 +24,8 @@ public class Utility {
         }
         return bidPrice;
     }
+
+    public static String buildSearchUri() {
+        return "";
+    }
 }

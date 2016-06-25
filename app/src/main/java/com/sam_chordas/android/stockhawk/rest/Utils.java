@@ -69,6 +69,16 @@ public class Utils {
         return change;
     }
 
+    public static String truncateBidPrice(String bidPrice) {
+        try {
+            bidPrice = String.format(defaultLocale, "%.2f", Float.parseFloat(bidPrice));
+        }
+        catch(NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid Argument: " + e);
+        }
+        return bidPrice;
+    }
+
     public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject) {
         ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
                 QuoteProvider.Quotes.CONTENT_URI);
