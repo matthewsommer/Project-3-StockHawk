@@ -17,7 +17,7 @@ public class Utils {
     private static String LOG_TAG = Utils.class.getSimpleName();
     private static Locale defaultLocale = Locale.getDefault();
     public static boolean showPercent = true;
-    private static final String CHANGE = "change";
+    private static final String CHANGE = "Change";
     private static final String SYMBOL = "symbol";
     private static final String BID = "Bid";
     private static final String CHANGE_IN_PERCENT = "ChangeinPercent";

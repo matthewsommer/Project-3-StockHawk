@@ -18,20 +18,13 @@ import java.util.List;
 public class Client {
     public static final String LOG_TAG = Client.class.getSimpleName();
 
-    public static String FetchStockData(List<Stock> stockList) {
+    public static String FetchStockData(Uri stockSearchUri) {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String jsonResponseStr = null;
-        StringBuilder stocksString = new StringBuilder();
-
-        for (Stock stock : stockList) {
-            stocksString.append("\"" + stock.getSymbol() + "\",");
-        }
-        stocksString.replace(stocksString.length() - 1, stocksString.length(), ")");
 
         try {
-            Contract.Stocks.buildStockSearchUri(stocksString.toString());
-            URL url = new URL(Contract.Stocks.buildStockSearchUri(stocksString.toString()).toString());
+            URL url = new URL(stockSearchUri.toString());
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
@@ -48,7 +41,6 @@ public class Client {
             }
 
             if (buffer.length() == 0) {
-                // Stream was empty.  No point in parsing.
                 return "";
             }
             jsonResponseStr = buffer.toString();

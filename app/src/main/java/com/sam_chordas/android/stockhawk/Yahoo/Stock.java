@@ -64,4 +64,52 @@ public class Stock implements Parcelable {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+
+    public String getPercent_change() {
+        return percent_change;
+    }
+
+    public void setPercent_change(String percent_change) {
+        this.percent_change = percent_change;
+    }
+
+    public String getChange() {
+        return change;
+    }
+
+    public void setChange(String change) {
+        this.change = change;
+    }
+
+    public String getBid_price() {
+        return bid_price;
+    }
+
+    public void setBid_price(String bid_price) {
+        this.bid_price = bid_price;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getIs_up() {
+        return is_up;
+    }
+
+    public void setIs_up(String is_up) {
+        this.is_up = is_up;
+    }
+
+    public String getIs_current() {
+        return is_current;
+    }
+
+    public void setIs_current(String is_current) {
+        this.is_current = is_current;
+    }
 }
