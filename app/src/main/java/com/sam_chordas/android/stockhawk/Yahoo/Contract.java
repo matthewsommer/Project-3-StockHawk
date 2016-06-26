@@ -33,11 +33,11 @@ public class Contract {
         private static final String CHANGE = "change";
         private static final String PERCENTCHANGE = "PercentChange";
 
-        public static Uri buildStockSearchUri(List<Stock> stockList) {
+        public static Uri buildStockSearchUri(List<Quote> quoteList) {
             StringBuilder stocksString = new StringBuilder();
 
-            for (Stock stock : stockList) {
-                stocksString.append("\"" + stock.getSymbol() + "\",");
+            for (Quote quote : quoteList) {
+                stocksString.append("\"" + quote.getSymbol() + "\",");
             }
             stocksString.replace(stocksString.length() - 1, stocksString.length(), ")");
 

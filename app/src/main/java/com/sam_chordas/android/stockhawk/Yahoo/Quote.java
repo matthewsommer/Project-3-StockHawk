@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class Stock implements Parcelable {
+public class Quote implements Parcelable {
     private String id;
     private String symbol;
     private String percent_change;
@@ -15,7 +15,7 @@ public class Stock implements Parcelable {
     private String is_up;
     private String is_current;
 
-    public Stock(String id, String symbol) {
+    public Quote(String id, String symbol) {
         setId(id);
         setSymbol(symbol);
     }
@@ -29,23 +29,23 @@ public class Stock implements Parcelable {
         out.writeString(getSymbol());
     }
 
-    public static final Parcelable.Creator<Stock> CREATOR
-            = new Parcelable.Creator<Stock>() {
-        public Stock createFromParcel(Parcel in) {
-            return new Stock(in);
+    public static final Parcelable.Creator<Quote> CREATOR
+            = new Parcelable.Creator<Quote>() {
+        public Quote createFromParcel(Parcel in) {
+            return new Quote(in);
         }
 
-        public Stock[] newArray(int size) {
-            return new Stock[size];
+        public Quote[] newArray(int size) {
+            return new Quote[size];
         }
     };
 
-    private Stock(Parcel in) {
+    private Quote(Parcel in) {
         setId(in.readString());
         setSymbol(in.readString());
     }
 
-    public List<Stock> FetchRemoteStocks() {
+    public List<Quote> FetchRemoteStocks() {
         return null;
     }
 

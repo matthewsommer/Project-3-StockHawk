@@ -1,7 +1,5 @@
 package com.sam_chordas.android.stockhawk.Yahoo;
 
-import android.net.Uri;
-
 import java.util.List;
 import java.util.Locale;
 
@@ -14,7 +12,7 @@ public class Utility {
     private static final String SEARCH_START = "select * from yahoo.finance.quotes where symbol "
             + "in (";
 
-    public static List<Stock> ParseResponseStr(String responseStr) {
+    public static List<Quote> ParseResponseStr(String responseStr) {
         return null;
     }
 

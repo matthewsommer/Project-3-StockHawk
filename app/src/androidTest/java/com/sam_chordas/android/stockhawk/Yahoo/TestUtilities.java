@@ -7,12 +7,12 @@ import java.util.List;
 
 public class TestUtilities extends AndroidTestCase {
 
-    static List<Stock> createStockSymbolValues() {
-        final List<Stock> stockList = new ArrayList<Stock>();
-        stockList.add(new Stock("0","YHOO"));
-        stockList.add(new Stock("1","AAPL"));
-        stockList.add(new Stock("2","GOOG"));
-        stockList.add(new Stock("3","MSFT"));
-        return stockList;
+    static List<Quote> createStockSymbolValues() {
+        final List<Quote> quoteList = new ArrayList<Quote>();
+        quoteList.add(new Quote("0","YHOO"));
+        quoteList.add(new Quote("1","AAPL"));
+        quoteList.add(new Quote("2","GOOG"));
+        quoteList.add(new Quote("3","MSFT"));
+        return quoteList;
     }
 }
