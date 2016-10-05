@@ -58,7 +58,7 @@ public class TestDbHelper extends AndroidTestCase {
     }
 
     public void testAllDbTables() {
-        TestDbTable(DbHelper.Tables.QUOTE, createQuoteValues());
+        TestDbTable(DbHelper.Tables.QUOTE, TestUtilities.createQuoteValues());
     }
 
     private void TestDbTable(String tableName, ContentValues contentValues) {
@@ -96,18 +96,5 @@ public class TestDbHelper extends AndroidTestCase {
                     "' did not match the expected value '" +
                     expectedValue + "'. " + error, expectedValue, valueCursor.getString(idx));
         }
-    }
-
-    static ContentValues createQuoteValues() {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.QuoteEntry.COLUMN_ID, 321);
-        contentValues.put(Contract.QuoteEntry.COLUMN_SYMBOL, "AAPL");
-        contentValues.put(Contract.QuoteEntry.COLUMN_PERCENT_CHANGE, "12%");
-        contentValues.put(Contract.QuoteEntry.COLUMN_CHANGE, "$2");
-        contentValues.put(Contract.QuoteEntry.COLUMN_BIDPRICE, "$2");
-        contentValues.put(Contract.QuoteEntry.COLUMN_CREATED, "06/12/16");
-        contentValues.put(Contract.QuoteEntry.COLUMN_ISUP, 1);
-        contentValues.put(Contract.QuoteEntry.COLUMN_ISCURRENT, 0);
-        return contentValues;
     }
 }

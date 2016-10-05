@@ -59,7 +59,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private void createTasksTable(SQLiteDatabase sqLiteDatabase) {
         final String SQL_CREATE_TASK_TABLE = "CREATE TABLE " +
                 Tables.QUOTE + " (" +
-                QuoteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                QuoteEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 QuoteEntry.COLUMN_SYMBOL + " TEXT NOT NULL," +
                 QuoteEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL," +
                 QuoteEntry.COLUMN_CHANGE + " TEXT NOT NULL," +

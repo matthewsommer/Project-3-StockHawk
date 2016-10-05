@@ -6,9 +6,9 @@ import android.provider.BaseColumns;
 
 public class Contract {
 
-    public static final String CONTENT_AUTHORITY = "com.sam_chordas.android.stockhawk";
+    public static final String CONTENT_AUTHORITY = "com.sam_chordas";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-    public static final String CONTENT_TYPE_APP_BASE = "sam_chordas.android.";
+    public static final String CONTENT_TYPE_APP_BASE = "sam_chordas.";
 
     //Mime type for google denoting this resolves to multiple objects
     public static final String CONTENT_TYPE_BASE = "vnd.android.cursor.dir/vnd."
@@ -61,7 +61,7 @@ public class Contract {
             return CONTENT_URI.buildUpon().build();
         }
 
-        public static long getTaskIdFromUri(Uri uri) {
+        public static long getQuoteIdFromUri(Uri uri) {
             return Long.valueOf(uri.getPathSegments().get(1));
         }
     }
