@@ -3,12 +3,13 @@ package com.sam_chordas.android.stockhawk.Yahoo;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.util.Log;
-import com.sam_chordas.android.stockhawk.data.QuoteColumns;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.List;
 import java.util.Vector;
+import com.sam_chordas.android.stockhawk.data.Contract.*;
 
 public class Contract {
     public static final class Stocks {
@@ -30,7 +31,7 @@ public class Contract {
         private static final String QUOTE = "quote";
         private static final String SYMBOL = "symbol";
         private static final String BID = "Bid";
-        private static final String CHANGE = "change";
+        private static final String CHANGE = "Change";
         private static final String PERCENTCHANGE = "PercentChange";
 
         public static Uri buildStockSearchUri(List<Quote> quoteList) {
@@ -50,7 +51,6 @@ public class Contract {
             return builtUri;
         }
 
-
         public static Vector<ContentValues> parseJSON(String jsonStr) {
             try {
                 JSONObject responseJSON = new JSONObject(jsonStr);
@@ -69,10 +69,10 @@ public class Contract {
                     String percentchange = stockData.getString(PERCENTCHANGE);
 
                     ContentValues stockValues = new ContentValues();
-                    stockValues.put(QuoteColumns.SYMBOL, symbol);
-                    stockValues.put(QuoteColumns.BIDPRICE, bid);
-                    stockValues.put(QuoteColumns.CHANGE, change);
-                    stockValues.put(QuoteColumns.PERCENT_CHANGE, percentchange);
+                    stockValues.put(QuoteEntry.COLUMN_SYMBOL, symbol);
+                    stockValues.put(QuoteEntry.COLUMN_BIDPRICE, bid);
+                    stockValues.put(QuoteEntry.COLUMN_CHANGE, change);
+                    stockValues.put(QuoteEntry.COLUMN_PERCENT_CHANGE, percentchange);
 
                     cVVector.add(stockValues);
                 }

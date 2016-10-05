@@ -1,6 +1,10 @@
 package com.sam_chordas.android.stockhawk.Yahoo;
 
+import android.content.ContentValues;
 import android.test.AndroidTestCase;
+
+import com.sam_chordas.android.stockhawk.Yahoo.Quote;
+import com.sam_chordas.android.stockhawk.data.Contract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,4 +19,6 @@ public class TestUtilities extends AndroidTestCase {
         quoteList.add(new Quote("3","MSFT"));
         return quoteList;
     }
+
+    public static final String TEST_STOCK_JSON = "";
 }

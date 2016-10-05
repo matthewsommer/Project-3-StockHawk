@@ -1,9 +1,10 @@
 package com.sam_chordas.android.stockhawk.Yahoo;
 
+import android.content.ContentValues;
 import android.net.Uri;
 import android.test.AndroidTestCase;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Vector;
 
 public class TestClient extends AndroidTestCase {
     private static final String LOG_TAG = TestClient.class.getSimpleName();
@@ -16,7 +17,9 @@ public class TestClient extends AndroidTestCase {
     public void testFetchStockData() {
         Uri stockSearchUri = Contract.Stocks.buildStockSearchUri(TestUtilities.createStockSymbolValues());
         String responseStr = Client.FetchStockData(stockSearchUri);
-        Contract.Stocks.parseJSON(responseStr);
         assertNotNull("Error: Yahoo Client.FetchStockData() null", responseStr);
+        Vector<ContentValues> cVVector = Contract.Stocks.parseJSON(responseStr);
+        assertNotNull("Error: Yahoo Contract.Stocks.parseJSON(responseStr) null", cVVector);
+        assertEquals(4,cVVector.size());
     }
 }

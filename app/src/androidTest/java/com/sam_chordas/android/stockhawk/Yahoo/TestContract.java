@@ -2,7 +2,6 @@ package com.sam_chordas.android.stockhawk.Yahoo;
 
 import android.net.Uri;
 import android.test.AndroidTestCase;
-import java.util.List;
 
 public class TestContract extends AndroidTestCase {
     private static final String TEST_SEARCH_URL = "https://query.yahooapis.com/v1/public" +

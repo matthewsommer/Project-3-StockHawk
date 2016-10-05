@@ -2,8 +2,10 @@ package com.sam_chordas.android.stockhawk.rest;
 
 import android.content.ContentProviderOperation;
 import android.util.Log;
-import com.sam_chordas.android.stockhawk.data.QuoteColumns;
-import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+
+import com.sam_chordas.android.stockhawk.data.Contract;
+import com.sam_chordas.android.stockhawk.data.Provider;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import org.json.JSONArray;
@@ -81,35 +83,35 @@ public class Utils {
 
     public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject) {
         ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
-                QuoteProvider.Quotes.CONTENT_URI);
-        try {
-
-
-            String bid = jsonObject.getString(BID);
-            String percent_change =jsonObject.getString(CHANGE_IN_PERCENT);
-
-            String change = jsonObject.getString(CHANGE);
-            builder.withValue(QuoteColumns.SYMBOL, jsonObject.getString(SYMBOL));
-            if(bid != "null") {
-                builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(bid));
-            }
-            if(percent_change != "null"){
-                builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(
-                        percent_change, true));
-            }
-            if(change != "null"){
-                builder.withValue(QuoteColumns.CHANGE, truncateChange(change, false));
-            }
-            builder.withValue(QuoteColumns.ISCURRENT, 1);
-            if (change.charAt(0) == '-') {
-                builder.withValue(QuoteColumns.ISUP, 0);
-            } else {
-                builder.withValue(QuoteColumns.ISUP, 1);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                Contract.QuoteEntry.CONTENT_URI);
+//        try {
+//
+//
+//            String bid = jsonObject.getString(BID);
+//            String percent_change =jsonObject.getString(CHANGE_IN_PERCENT);
+//
+//            String change = jsonObject.getString(CHANGE);
+//            builder.withValue(Contract.QuoteEntry.COLUMN_SYMBOL, jsonObject.getString(SYMBOL));
+//            if(bid != "null") {
+//                builder.withValue(Contract.QuoteEntry.COLUMN_BIDPRICE, truncateBidPrice(bid));
+//            }
+//            if(percent_change != "null"){
+//                builder.withValue(Contract.QuoteEntry.COLUMN_PERCENT_CHANGE, truncateChange(
+//                        percent_change, true));
+//            }
+//            if(change != "null"){
+//                builder.withValue(Contract.QuoteEntry.COLUMN_CHANGE, truncateChange(change, false));
+//            }
+//            builder.withValue(Contract.QuoteEntry.COLUMN_ISCURRENT, 1);
+//            if (change.charAt(0) == '-') {
+//                builder.withValue(Contract.QuoteEntry.COLUMN_ISUP, 0);
+//            } else {
+//                builder.withValue(Contract.QuoteEntry.COLUMN_ISUP, 1);
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         return builder.build();
     }
 }
