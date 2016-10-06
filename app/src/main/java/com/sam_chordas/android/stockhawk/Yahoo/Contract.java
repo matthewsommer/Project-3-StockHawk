@@ -70,9 +70,12 @@ public class Contract {
 
                     ContentValues stockValues = new ContentValues();
                     stockValues.put(QuoteEntry.COLUMN_SYMBOL, symbol);
-                    stockValues.put(QuoteEntry.COLUMN_BIDPRICE, bid);
-                    stockValues.put(QuoteEntry.COLUMN_CHANGE, change);
                     stockValues.put(QuoteEntry.COLUMN_PERCENT_CHANGE, percentchange);
+                    stockValues.put(QuoteEntry.COLUMN_CHANGE, change);
+                    stockValues.put(QuoteEntry.COLUMN_BIDPRICE, bid);
+                    stockValues.put(QuoteEntry.COLUMN_CREATED, "6/23/83");
+                    stockValues.put(QuoteEntry.COLUMN_ISUP, 0);
+                    stockValues.put(QuoteEntry.COLUMN_ISCURRENT, 0);
 
                     cVVector.add(stockValues);
                 }

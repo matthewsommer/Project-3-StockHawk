@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class Provider extends ContentProvider {
 
@@ -147,13 +148,16 @@ public class Provider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         normalizeDate(value);
-                        long _id = db.insert(match.table_name, null, value);
+                        long _id = db.insertOrThrow(match.table_name, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
                     }
                     db.setTransactionSuccessful();
-                } finally {
+                } catch (Exception e) {
+                    Log.d("dbInsertFailed", String.valueOf(e));
+                }
+                finally {
                     db.endTransaction();
                 }
                 getContext().getContentResolver().notifyChange(uri, null);

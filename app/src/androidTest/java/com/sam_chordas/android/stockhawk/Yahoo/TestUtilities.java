@@ -19,6 +19,4 @@ public class TestUtilities extends AndroidTestCase {
         quoteList.add(new Quote("3","MSFT"));
         return quoteList;
     }
-
-    public static final String TEST_STOCK_JSON = "";
 }

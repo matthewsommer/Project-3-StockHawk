@@ -3,9 +3,6 @@ package com.sam_chordas.android.stockhawk.Yahoo;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by Matt on 6/25/16.
- */
 public class Utility {
     private static final String LOG_TAG = Utility.class.getSimpleName();
     private static Locale defaultLocale = Locale.getDefault();
@@ -29,6 +26,4 @@ public class Utility {
     public static String buildSearchUri() {
         return "";
     }
-
-
 }

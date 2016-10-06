@@ -26,12 +26,8 @@ import com.sam_chordas.android.stockhawk.data.Contract;
 import com.sam_chordas.android.stockhawk.rest.QuoteCursorAdapter;
 import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
 import com.sam_chordas.android.stockhawk.rest.Utils;
-import com.sam_chordas.android.stockhawk.service.StockIntentService;
-import com.sam_chordas.android.stockhawk.service.StockTaskService;
-import com.google.android.gms.gcm.GcmNetworkManager;
-import com.google.android.gms.gcm.PeriodicTask;
-import com.google.android.gms.gcm.Task;
 import com.melnykov.fab.FloatingActionButton;
+import com.sam_chordas.android.stockhawk.sync.SyncAdapter;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
 
 public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -63,14 +59,11 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     isConnected = activeNetwork != null &&
         activeNetwork.isConnectedOrConnecting();
     setContentView(R.layout.activity_my_stocks);
-    // The intent service is for executing immediate pulls from the Yahoo API
-    // GCMTaskService can only schedule tasks, they cannot execute immediately
-    mServiceIntent = new Intent(this, StockIntentService.class);
+
     if (savedInstanceState == null){
-      // Run the initialize task service so that some stocks appear upon an empty database
-      mServiceIntent.putExtra("tag", "init");
       if (isConnected){
-        startService(mServiceIntent);
+        SyncAdapter.initializeSyncAdapter(this);
+        SyncAdapter.syncImmediately(this);
       } else{
         networkToast();
       }
@@ -114,9 +107,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                     return;
                   } else {
                     // Add the stock to DB
-                    mServiceIntent.putExtra("tag", "add");
-                    mServiceIntent.putExtra("symbol", input.toString());
-                    startService(mServiceIntent);
+//                    mServiceIntent.putExtra("tag", "add");
+//                    mServiceIntent.putExtra("symbol", input.toString());
+//                    startService(mServiceIntent);
                   }
                 }
               })
@@ -132,25 +125,6 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     mItemTouchHelper.attachToRecyclerView(recyclerView);
 
     mTitle = getTitle();
-    if (isConnected){
-      long period = 3600L;
-      long flex = 10L;
-      String periodicTag = "periodic";
-
-      // create a periodic task to pull stocks once every hour after the app has been opened. This
-      // is so Widget data stays up to date.
-      PeriodicTask periodicTask = new PeriodicTask.Builder()
-          .setService(StockTaskService.class)
-          .setPeriod(period)
-          .setFlex(flex)
-          .setTag(periodicTag)
-          .setRequiredNetwork(Task.NETWORK_STATE_CONNECTED)
-          .setRequiresCharging(false)
-          .build();
-      // Schedule task with tag "periodic." This ensure that only the stocks present in the DB
-      // are updated.
-      GcmNetworkManager.getInstance(this).schedule(periodicTask);
-    }
   }
 
 
@@ -206,7 +180,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
         new String[]{ Contract.QuoteEntry.COLUMN_ID, Contract.QuoteEntry.COLUMN_SYMBOL, Contract.QuoteEntry.COLUMN_BIDPRICE,
                 Contract.QuoteEntry.COLUMN_PERCENT_CHANGE, Contract.QuoteEntry.COLUMN_CHANGE, Contract.QuoteEntry.COLUMN_ISUP},
             Contract.QuoteEntry.COLUMN_ISCURRENT + " = ?",
-        new String[]{"1"},
+        new String[]{"0"},
         null);
   }
 
