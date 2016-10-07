@@ -125,9 +125,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 //                    startService(mServiceIntent);
 
                       ContentValues contentValues = new ContentValues();
-                      contentValues.put(Contract.QuoteEntry.COLUMN_SYMBOL, "TSLA");
-
+                      contentValues.put(Contract.QuoteEntry.COLUMN_SYMBOL, input.toString());
                       getContentResolver().insert(Contract.QuoteEntry.CONTENT_URI, contentValues);
+                      SyncAdapter.syncImmediately(MyStocksActivity.this);
                   }
                 }
               })

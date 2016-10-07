@@ -22,9 +22,12 @@ public class RemoteQuotesDataFetcher {
     }
 
     public static Vector<ContentValues> fetchQuoteData(List<Quote> quoteList) {
-        Uri stockSearchUri = YahooDataContract.Stocks.buildStockSearchUri(quoteList);
-        String responseStr = YahooClient.FetchStockData(stockSearchUri);
-        Vector<ContentValues> cVVector = QuoteHandler.parseJSON(responseStr);
+        Vector<ContentValues> cVVector = null;
+        if (quoteList.size() > 0) {
+            Uri stockSearchUri = YahooDataContract.Stocks.buildStockSearchUri(quoteList);
+            String responseStr = YahooClient.FetchStockData(stockSearchUri);
+            cVVector = QuoteHandler.parseJSON(responseStr);
+        }
         return cVVector;
     }
 }

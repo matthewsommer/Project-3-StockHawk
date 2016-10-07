@@ -15,8 +15,7 @@ public class Quote implements Parcelable {
     private String is_up;
     private String is_current;
 
-    public Quote(String id, String symbol) {
-        setId(id);
+    public Quote(String symbol) {
         setSymbol(symbol);
     }
 

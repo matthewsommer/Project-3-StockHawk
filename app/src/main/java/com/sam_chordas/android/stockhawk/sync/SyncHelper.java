@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SyncResult;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -67,12 +68,26 @@ public class SyncHelper {
             Log.d("Offline", "Not syncing, offline");
             return false;
         }
+
+        Cursor c = mContext.getContentResolver().query(Contract.QuoteEntry.CONTENT_URI,
+                new String[]{ Contract.QuoteEntry.COLUMN_SYMBOL},
+                null,
+                null,
+                null);
+
         final List<Quote> quoteList = new ArrayList<Quote>();
-        quoteList.add(new Quote("0","YHOO"));
-        quoteList.add(new Quote("1","AAPL"));
-        quoteList.add(new Quote("2","GOOG"));
-        quoteList.add(new Quote("3","MSFT"));
-        quoteList.add(new Quote("4","ASDFASDF"));
+
+        if (c.getCount() != 0) {
+            try {
+                while (c.moveToNext()) {
+                    Log.d("cursor",c.getString(c.getColumnIndex(Contract.QuoteEntry.COLUMN_SYMBOL)));
+                    quoteList.add(new Quote(c.getString(c.getColumnIndex(Contract.QuoteEntry.COLUMN_SYMBOL))));
+                }
+            } finally {
+                c.close();
+            }
+        }
+
         Vector<ContentValues> cVVector = RemoteQuotesDataFetcher.fetchQuoteData(quoteList);
         int insertCount = mQuotesDataHandler.insertQuotes(cVVector, Contract.QuoteEntry.CONTENT_URI);
         return true;
