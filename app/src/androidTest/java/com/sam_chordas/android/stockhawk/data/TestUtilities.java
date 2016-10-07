@@ -88,12 +88,12 @@ public class TestUtilities extends AndroidTestCase {
     }
 
     static public final int BULK_INSERT_RECORDS_TO_INSERT = 10;
-    static ContentValues[] createBulkInsertTaskValues() {
+    static ContentValues[] createBulkInsertQuotesValues() {
         ContentValues[] returnContentValues = new ContentValues[BULK_INSERT_RECORDS_TO_INSERT];
 
         for ( int i = 0; i < BULK_INSERT_RECORDS_TO_INSERT; i++) {
-            ContentValues taskValues = TestUtilities.createQuoteValues();
-            returnContentValues[i] = taskValues;
+            ContentValues quoteValues = TestUtilities.createQuoteValues();
+            returnContentValues[i] = quoteValues;
         }
         return returnContentValues;
     }

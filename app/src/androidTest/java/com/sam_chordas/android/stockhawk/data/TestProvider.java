@@ -99,7 +99,7 @@ public class TestProvider extends AndroidTestCase {
     }
 
     public void testBulkInsert() {
-        ContentValues[] bulkInsertContentValues = TestUtilities.createBulkInsertTaskValues();
+        ContentValues[] bulkInsertContentValues = TestUtilities.createBulkInsertQuotesValues();
 
         TestUtilities.TestContentObserver contentObserver = TestUtilities.getTestContentObserver();
         mContentResolver.registerContentObserver(Contract.QuoteEntry.CONTENT_URI, true, contentObserver);

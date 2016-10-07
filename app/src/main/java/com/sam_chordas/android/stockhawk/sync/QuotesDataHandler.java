@@ -25,18 +25,6 @@ public class QuotesDataHandler {
                 SP_KEY_DATA_TIMESTAMP).commit();
     }
 
-    public void insertOrUpdateQuote(ContentValues contentValues, Uri contentUri) {
-        Cursor c = mContext.getContentResolver().query(Contract.QuoteEntry.CONTENT_URI,
-                new String[] { Contract.QuoteEntry.COLUMN_SYMBOL }, Contract.QuoteEntry.COLUMN_SYMBOL + "= ?",
-                new String[] { contentValues.getAsString(Contract.QuoteEntry.COLUMN_SYMBOL) }, null);
-
-        if (c.getCount() != 0) {
-
-        } else {
-            Uri uri = mContext.getContentResolver().insert(contentUri,contentValues);
-        }
-    }
-
     public int insertQuotes(Vector<ContentValues> cVVector, Uri contentUri) {
         int inserted = 0;
         ContentValues contentValues = new ContentValues();

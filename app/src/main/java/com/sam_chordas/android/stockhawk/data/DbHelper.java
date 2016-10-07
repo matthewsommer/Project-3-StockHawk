@@ -29,7 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        createTasksTable(sqLiteDatabase);
+        createQuotesTable(sqLiteDatabase);
     }
 
     @Override
@@ -56,8 +56,8 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    private void createTasksTable(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_TASK_TABLE = "CREATE TABLE " +
+    private void createQuotesTable(SQLiteDatabase sqLiteDatabase) {
+        final String SQL_CREATE_QUOTES_TABLE = "CREATE TABLE " +
                 Tables.QUOTE + " (" +
                 QuoteEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 QuoteEntry.COLUMN_SYMBOL + " TEXT NOT NULL," +
@@ -67,6 +67,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 QuoteEntry.COLUMN_CREATED + " TEXT," +
                 QuoteEntry.COLUMN_ISUP + " INTEGER," +
                 QuoteEntry.COLUMN_ISCURRENT + " INTEGER);";
-        sqLiteDatabase.execSQL(SQL_CREATE_TASK_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_QUOTES_TABLE);
     }
 }

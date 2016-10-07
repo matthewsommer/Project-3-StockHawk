@@ -104,17 +104,6 @@ public class Provider extends ContentProvider {
         return rowsDeleted;
     }
 
-    private void normalizeDate(ContentValues values) {
-//        if (values.containsKey(JIRAContract.TaskEntry.COLUMN_CREATED_DATE)) {
-//            String dateStr = values.getAsString(JIRAContract.TaskEntry.COLUMN_CREATED_DATE);
-//            values.put(JIRAContract.TaskEntry.COLUMN_CREATED_DATE, JIRAContract.normalizeDate(dateStr));
-//        }
-//        if (values.containsKey(JIRAContract.TaskEntry.COLUMN_UPDATED_DATE)) {
-//            String dateStr = values.getAsString(JIRAContract.TaskEntry.COLUMN_UPDATED_DATE);
-//            values.put(JIRAContract.TaskEntry.COLUMN_UPDATED_DATE, JIRAContract.normalizeDate(dateStr));
-//        }
-    }
-
     @Override
     public int update(
             Uri uri, ContentValues values, String selection, String[] selectionArgs) {
@@ -125,7 +114,6 @@ public class Provider extends ContentProvider {
         //by default we will normalize the date (if needed) and then update db
         switch (match) {
             default: {
-                normalizeDate(values);
                 rowsUpdated = db.update(match.table_name, values, selection,
                         selectionArgs);
                 break;
@@ -147,7 +135,6 @@ public class Provider extends ContentProvider {
                 int returnCount = 0;
                 try {
                     for (ContentValues value : values) {
-                        normalizeDate(value);
                         long _id = db.insertOrThrow(match.table_name, null, value);
                         if (_id != -1) {
                             returnCount++;
@@ -195,9 +182,9 @@ public class Provider extends ContentProvider {
 
     private Cursor queryEntryCursorById(Uri uri, String[] projection, String sortOrder, ProviderUriEnum pEnum, SQLiteDatabase db) {
 
-        String taskId = uri.getPathSegments().get(1);;
+        String quoteId = uri.getPathSegments().get(1);;
         String selection = BaseColumns._ID + " =?";
-        String[] selectionArgs = new String[]{taskId};
+        String[] selectionArgs = new String[]{quoteId};
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         builder.setTables(pEnum.table_name);
 
