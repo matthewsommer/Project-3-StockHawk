@@ -9,7 +9,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.db.chart.Tools;
@@ -25,14 +24,12 @@ public class StockDetailsActivity extends AppCompatActivity implements
 
     public static final String TAG_STOCK_SYMBOL = "STOCK_SYMBOL";
     private static final int STOCKS_LOADER = 1;
-
     private String symbol = "";
     private LineChartView lineChartView;
 
     public static Intent getStartActivityIntent(Context context, String symbol) {
         Intent intent = new Intent(context, StockDetailsActivity.class);
         intent.putExtra(StockDetailsActivity.TAG_STOCK_SYMBOL, symbol);
-
         return intent;
     }
 
@@ -40,11 +37,9 @@ public class StockDetailsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line_graph);
-
         symbol = getIntent().getStringExtra(TAG_STOCK_SYMBOL);
         setTitle(symbol);
         lineChartView = (LineChartView) findViewById(R.id.linechart);
-
         getSupportLoaderManager().initLoader(STOCKS_LOADER, null, this);
     }
 
@@ -60,6 +55,10 @@ public class StockDetailsActivity extends AppCompatActivity implements
                         null);
         }
         return null;
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
     }
 
     @Override
@@ -106,9 +105,5 @@ public class StockDetailsActivity extends AppCompatActivity implements
             lineChartView.show(anim);
         else
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
     }
 }

@@ -9,6 +9,7 @@
   <string name="content_test">Search for a Stock Symbol</string>
   <string name="input_hint">FB</string>
   <string name="input_prefill"></string>
+  <string name="widget_text">Stock Hawk</string>
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
 
     <!-- SyncAdapter related -->
