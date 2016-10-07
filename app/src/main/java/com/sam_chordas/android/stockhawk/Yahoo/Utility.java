@@ -1,5 +1,7 @@
 package com.sam_chordas.android.stockhawk.Yahoo;
 
+import com.sam_chordas.android.stockhawk.model.Quote;
+
 import java.util.List;
 import java.util.Locale;
 

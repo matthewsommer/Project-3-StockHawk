@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.sam_chordas.android.stockhawk.AccountUtil;
 import com.sam_chordas.android.stockhawk.data.Contract.*;
-import com.sam_chordas.android.stockhawk.sync.DataHandler;
+import com.sam_chordas.android.stockhawk.sync.QuotesDataHandler;
 import com.sam_chordas.android.stockhawk.sync.SyncHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
 
-    private static final int VER_0_1 = 8;
+    private static final int VER_0_1 = 9;
     private static final int CUR_DB_VER = VER_0_1;
     static final String DB_NAME = "stockhawk.db";
     private final Context mContext;
@@ -49,7 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         if (dataInvalidated) {
-            DataHandler.resetDataTimestamp(mContext);
+            QuotesDataHandler.resetDataTimestamp(mContext);
             if (account != null) {
                 SyncHelper.requestManualSync(account);
             }
@@ -61,12 +61,12 @@ public class DbHelper extends SQLiteOpenHelper {
                 Tables.QUOTE + " (" +
                 QuoteEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 QuoteEntry.COLUMN_SYMBOL + " TEXT NOT NULL," +
-                QuoteEntry.COLUMN_PERCENT_CHANGE + " TEXT NOT NULL," +
-                QuoteEntry.COLUMN_CHANGE + " TEXT NOT NULL," +
-                QuoteEntry.COLUMN_BIDPRICE + " TEXT NOT NULL," +
-                QuoteEntry.COLUMN_CREATED + " TEXT NOT NULL," +
-                QuoteEntry.COLUMN_ISUP + " INTEGER NOT NULL," +
-                QuoteEntry.COLUMN_ISCURRENT + " INTEGER NOT NULL);";
+                QuoteEntry.COLUMN_PERCENT_CHANGE + " TEXT," +
+                QuoteEntry.COLUMN_CHANGE + " TEXT," +
+                QuoteEntry.COLUMN_BIDPRICE + " TEXT," +
+                QuoteEntry.COLUMN_CREATED + " TEXT," +
+                QuoteEntry.COLUMN_ISUP + " INTEGER," +
+                QuoteEntry.COLUMN_ISCURRENT + " INTEGER);";
         sqLiteDatabase.execSQL(SQL_CREATE_TASK_TABLE);
     }
 }

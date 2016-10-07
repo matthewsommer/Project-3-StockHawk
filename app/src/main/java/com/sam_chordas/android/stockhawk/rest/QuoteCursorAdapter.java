@@ -45,7 +45,15 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
   @Override
   public void onBindViewHolder(final ViewHolder viewHolder, final Cursor cursor){
     viewHolder.symbol.setText(cursor.getString(cursor.getColumnIndex("symbol")));
-    viewHolder.bidPrice.setText(cursor.getString(cursor.getColumnIndex("bid_price")));
+
+    String bidPrice = cursor.getString(cursor.getColumnIndex("bid_price"));
+    if (bidPrice.equalsIgnoreCase("null")) {
+      viewHolder.bidPrice.setText("No Price");
+      viewHolder.change.setVisibility(View.INVISIBLE);
+    } else {
+      viewHolder.bidPrice.setText(bidPrice);
+    }
+
     int sdk = Build.VERSION.SDK_INT;
     if (cursor.getInt(cursor.getColumnIndex("is_up")) == 1){
       if (sdk < Build.VERSION_CODES.JELLY_BEAN){
@@ -74,7 +82,7 @@ public class QuoteCursorAdapter extends CursorRecyclerViewAdapter<QuoteCursorAda
   @Override public void onItemDismiss(int position) {
 //    Cursor c = getCursor();
 //    c.moveToPosition(position);
-//    String symbol = c.getString(c.getColumnIndex(Contract.QuoteEntry.COLUMN_SYMBOL));
+//    String symbol = c.getString(c.getColumnIndex(YahooDataContract.QuoteEntry.COLUMN_SYMBOL));
 //    mContext.getContentResolver().delete(Provider.Quotes.withSymbol(symbol), null, null);
 //    notifyItemRemoved(position);
   }

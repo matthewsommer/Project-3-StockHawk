@@ -10,7 +10,7 @@ public class TestContract extends AndroidTestCase {
             "env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 
     public void testBuildStockSearchUri() {
-        Uri stockSearchUri = Contract.Stocks.buildStockSearchUri(TestUtilities.createStockSymbolValues());
+        Uri stockSearchUri = YahooDataContract.Stocks.buildStockSearchUri(TestUtilities.createStockSymbolValues());
         assertEquals("Error: Uri unmatched", stockSearchUri.toString(), TEST_SEARCH_URL);
     }
 }

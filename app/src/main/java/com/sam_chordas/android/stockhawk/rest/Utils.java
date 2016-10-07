@@ -5,7 +5,7 @@ import java.util.Locale;
 //
 //import android.util.Log;
 //
-//import com.sam_chordas.android.stockhawk.data.Contract;
+//import com.sam_chordas.android.stockhawk.data.YahooDataContract;
 //import com.sam_chordas.android.stockhawk.data.Provider;
 //
 //import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class Utils {
 
 //    public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject) {
 //     //   ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
-//          //      Contract.QuoteEntry.CONTENT_URI);
+//          //      YahooDataContract.QuoteEntry.CONTENT_URI);
 ////        try {
 ////
 ////
@@ -93,22 +93,22 @@ public class Utils {
 ////            String percent_change =jsonObject.getString(CHANGE_IN_PERCENT);
 ////
 ////            String change = jsonObject.getString(CHANGE);
-////            builder.withValue(Contract.QuoteEntry.COLUMN_SYMBOL, jsonObject.getString(SYMBOL));
+////            builder.withValue(YahooDataContract.QuoteEntry.COLUMN_SYMBOL, jsonObject.getString(SYMBOL));
 ////            if(bid != "null") {
-////                builder.withValue(Contract.QuoteEntry.COLUMN_BIDPRICE, truncateBidPrice(bid));
+////                builder.withValue(YahooDataContract.QuoteEntry.COLUMN_BIDPRICE, truncateBidPrice(bid));
 ////            }
 ////            if(percent_change != "null"){
-////                builder.withValue(Contract.QuoteEntry.COLUMN_PERCENT_CHANGE, truncateChange(
+////                builder.withValue(YahooDataContract.QuoteEntry.COLUMN_PERCENT_CHANGE, truncateChange(
 ////                        percent_change, true));
 ////            }
 ////            if(change != "null"){
-////                builder.withValue(Contract.QuoteEntry.COLUMN_CHANGE, truncateChange(change, false));
+////                builder.withValue(YahooDataContract.QuoteEntry.COLUMN_CHANGE, truncateChange(change, false));
 ////            }
-////            builder.withValue(Contract.QuoteEntry.COLUMN_ISCURRENT, 1);
+////            builder.withValue(YahooDataContract.QuoteEntry.COLUMN_ISCURRENT, 1);
 ////            if (change.charAt(0) == '-') {
-////                builder.withValue(Contract.QuoteEntry.COLUMN_ISUP, 0);
+////                builder.withValue(YahooDataContract.QuoteEntry.COLUMN_ISUP, 0);
 ////            } else {
-////                builder.withValue(Contract.QuoteEntry.COLUMN_ISUP, 1);
+////                builder.withValue(YahooDataContract.QuoteEntry.COLUMN_ISUP, 1);
 ////            }
 ////
 ////        } catch (JSONException e) {

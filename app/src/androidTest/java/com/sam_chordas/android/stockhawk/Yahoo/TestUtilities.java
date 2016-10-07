@@ -1,10 +1,8 @@
 package com.sam_chordas.android.stockhawk.Yahoo;
 
-import android.content.ContentValues;
 import android.test.AndroidTestCase;
 
-import com.sam_chordas.android.stockhawk.Yahoo.Quote;
-import com.sam_chordas.android.stockhawk.data.Contract;
+import com.sam_chordas.android.stockhawk.model.Quote;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,14 +17,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.sam_chordas.android.stockhawk.R;
-import com.sam_chordas.android.stockhawk.Yahoo.Client;
-import com.sam_chordas.android.stockhawk.Yahoo.Quote;
 import com.sam_chordas.android.stockhawk.data.Contract;
-import com.sam_chordas.android.stockhawk.data.Provider;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Vector;
 
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
@@ -34,47 +28,21 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
     private static final int QUOTE_NOTIFICATION_ID = 3004;
 
-
     private static final String[] NOTIFY_QUOTE_PROJECTION = new String[] {
             Contract.QuoteEntry.COLUMN_ID
     };
 
+    private final Context mContext;
+
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
+        mContext = context;
     }
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         Log.d(LOG_TAG, "Starting sync");
-        syncQuotes();
-    }
-
-    private void syncQuotes(){
-        final List<Quote> quoteList = new ArrayList<Quote>();
-        quoteList.add(new Quote("0","YHOO"));
-        quoteList.add(new Quote("1","AAPL"));
-        quoteList.add(new Quote("2","GOOG"));
-        quoteList.add(new Quote("3","MSFT"));
-        Uri stockSearchUri = com.sam_chordas.android.stockhawk.Yahoo.Contract.Stocks.buildStockSearchUri(quoteList);
-        String responseStr = Client.FetchStockData(stockSearchUri);
-        Vector<ContentValues> cVVector = com.sam_chordas.android.stockhawk.Yahoo.Contract.Stocks.parseJSON(responseStr);
-        insertData(cVVector, Contract.QuoteEntry.CONTENT_URI);
-    }
-
-    private void insertData(Vector<ContentValues> cVVector, Uri contentUri) {
-        int inserted = 0;
-        getContext().getContentResolver().delete(contentUri,
-                null,
-                null);
-
-        if ( cVVector.size() > 0 ) {
-            ContentValues[] cvArray = new ContentValues[cVVector.size()];
-            cVVector.toArray(cvArray);
-            inserted = getContext().getContentResolver().bulkInsert(contentUri, cvArray);
-            notifyTask();
-        }
-
-        Log.d(LOG_TAG, "Sync Complete. " + inserted + " Inserted");
+        new SyncHelper(mContext).performSync(syncResult, account, extras);
     }
 
     private void notifyTask() {
@@ -95,9 +63,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    /**
-     * Helper method to schedule the sync adapter periodic execution
-     */
     public static void configurePeriodicSync(Context context, int syncInterval, int flexTime) {
         Account account = getSyncAccount(context);
         String authority = context.getString(R.string.content_authority);
@@ -114,10 +79,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    /**
-     * Helper method to have the sync adapter sync immediately
-     * @param context The context used to access the account service
-     */
     public static void syncImmediately(Context context) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);

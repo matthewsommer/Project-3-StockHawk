@@ -1,4 +1,4 @@
-package com.sam_chordas.android.stockhawk.Yahoo;
+package com.sam_chordas.android.stockhawk.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -27,14 +27,14 @@ public class Quote implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(getId());
         out.writeString(getSymbol());
+        out.writeString(getPercent_change());
+        out.writeString(getBid_price());
     }
 
-    public static final Parcelable.Creator<Quote> CREATOR
-            = new Parcelable.Creator<Quote>() {
+    public static final Parcelable.Creator<Quote> CREATOR = new Parcelable.Creator<Quote>() {
         public Quote createFromParcel(Parcel in) {
             return new Quote(in);
         }
-
         public Quote[] newArray(int size) {
             return new Quote[size];
         }
@@ -43,6 +43,8 @@ public class Quote implements Parcelable {
     private Quote(Parcel in) {
         setId(in.readString());
         setSymbol(in.readString());
+        setPercent_change(in.readString());
+        setBid_price(in.readString());
     }
 
     public List<Quote> FetchRemoteStocks() {

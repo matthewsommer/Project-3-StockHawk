@@ -15,11 +15,11 @@ public class TestClient extends AndroidTestCase {
     }
 
     public void testFetchStockData() {
-        Uri stockSearchUri = Contract.Stocks.buildStockSearchUri(TestUtilities.createStockSymbolValues());
-        String responseStr = Client.FetchStockData(stockSearchUri);
-        assertNotNull("Error: Yahoo Client.FetchStockData() null", responseStr);
-        Vector<ContentValues> cVVector = Contract.Stocks.parseJSON(responseStr);
-        assertNotNull("Error: Yahoo Contract.Stocks.parseJSON(responseStr) null", cVVector);
+        Uri stockSearchUri = YahooDataContract.Stocks.buildStockSearchUri(TestUtilities.createStockSymbolValues());
+        String responseStr = YahooClient.FetchStockData(stockSearchUri);
+        assertNotNull("Error: Yahoo YahooClient.FetchStockData() null", responseStr);
+        Vector<ContentValues> cVVector = QuoteHandler.parseJSON(responseStr);
+        assertNotNull("Error: Yahoo YahooDataContract.Stocks.parseJSON(responseStr) null", cVVector);
         assertEquals(4,cVVector.size());
     }
 }

@@ -2,21 +2,16 @@ package com.sam_chordas.android.stockhawk.Yahoo;
 
 import android.net.Uri;
 import android.util.Log;
-import android.util.StringBuilderPrinter;
 
-import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.List;
 
-public class Client {
-    public static final String LOG_TAG = Client.class.getSimpleName();
+public class YahooClient {
+    public static final String LOG_TAG = YahooClient.class.getSimpleName();
 
     public static String FetchStockData(Uri stockSearchUri) {
         HttpURLConnection urlConnection = null;
@@ -44,7 +39,6 @@ public class Client {
                 return "";
             }
             jsonResponseStr = buffer.toString();
-            return jsonResponseStr;
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
         } finally {
@@ -59,6 +53,6 @@ public class Client {
                 }
             }
         }
-        return null;
+        return jsonResponseStr;
     }
 }

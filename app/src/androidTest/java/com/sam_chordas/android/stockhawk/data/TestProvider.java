@@ -58,7 +58,6 @@ public class TestProvider extends AndroidTestCase {
 
     public void testGetType() {
         testGetType(ProviderUriEnum.QUOTE.contentType, Contract.QuoteEntry.CONTENT_URI);
-
         testGetType(ProviderUriEnum.QUOTE.contentType, Contract.QuoteEntry.CONTENT_URI);
         testGetType(ProviderUriEnum.QUOTE_WITH_ID.contentType, Contract.QuoteEntry.buildUri(321));
     }
@@ -68,7 +67,7 @@ public class TestProvider extends AndroidTestCase {
         assertEquals("Error: CONTENT_URI should return CONTENT_TYPE", contentType, type);
     }
 
-    public void testQuoteQuery() {
+    public void testQuoteInsertQueryUpdateDelete() {
 
         //Insert
         ContentValues quoteValues = TestUtilities.createQuoteValues();

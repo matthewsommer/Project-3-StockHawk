@@ -1,6 +1,7 @@
 package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.LoaderManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,13 +25,23 @@ import android.view.View;
 import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.Yahoo.QuoteHandler;
+import com.sam_chordas.android.stockhawk.Yahoo.YahooClient;
+import com.sam_chordas.android.stockhawk.Yahoo.YahooDataContract;
 import com.sam_chordas.android.stockhawk.data.Contract;
+import com.sam_chordas.android.stockhawk.data.Provider;
+import com.sam_chordas.android.stockhawk.model.Quote;
 import com.sam_chordas.android.stockhawk.rest.QuoteCursorAdapter;
 import com.sam_chordas.android.stockhawk.rest.RecyclerViewItemClickListener;
 import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.melnykov.fab.FloatingActionButton;
+import com.sam_chordas.android.stockhawk.sync.QuotesDataHandler;
 import com.sam_chordas.android.stockhawk.sync.SyncAdapter;
 import com.sam_chordas.android.stockhawk.touch_helper.SimpleItemTouchHelperCallback;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 public class MyStocksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -110,6 +123,11 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
 //                    mServiceIntent.putExtra("tag", "add");
 //                    mServiceIntent.putExtra("symbol", input.toString());
 //                    startService(mServiceIntent);
+
+                      ContentValues contentValues = new ContentValues();
+                      contentValues.put(Contract.QuoteEntry.COLUMN_SYMBOL, "TSLA");
+
+                      getContentResolver().insert(Contract.QuoteEntry.CONTENT_URI, contentValues);
                   }
                 }
               })
