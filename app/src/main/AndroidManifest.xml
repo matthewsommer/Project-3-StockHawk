@@ -32,6 +32,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.sam_chordas.android.stockhawk.ui.StockDetailsActivity"
+            android:label="Stock Details" >
+        </activity>
+
         <provider
             android:name=".data.Provider"
             android:authorities="@string/content_authority"

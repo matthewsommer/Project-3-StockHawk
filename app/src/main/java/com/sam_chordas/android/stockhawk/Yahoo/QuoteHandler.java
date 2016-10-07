@@ -40,12 +40,12 @@ public class QuoteHandler {
 
                 ContentValues stockValues = new ContentValues();
                 stockValues.put(Contract.QuoteEntry.COLUMN_SYMBOL, symbol);
-                stockValues.put(Contract.QuoteEntry.COLUMN_PERCENT_CHANGE, percentchange);
-                stockValues.put(Contract.QuoteEntry.COLUMN_CHANGE, change);
-                stockValues.put(Contract.QuoteEntry.COLUMN_BIDPRICE, bid);
-                stockValues.put(Contract.QuoteEntry.COLUMN_CREATED, "6/23/83");
+                stockValues.put(Contract.QuoteEntry.COLUMN_PERCENT_CHANGE, Utility.truncateChange(percentchange,true));
+                stockValues.put(Contract.QuoteEntry.COLUMN_CHANGE, Utility.truncateChange(change,false));
+                stockValues.put(Contract.QuoteEntry.COLUMN_BIDPRICE, Utility.truncateBidPrice(bid));
+                stockValues.put(Contract.QuoteEntry.COLUMN_CREATED, "");
                 stockValues.put(Contract.QuoteEntry.COLUMN_ISUP, 0);
-                stockValues.put(Contract.QuoteEntry.COLUMN_ISCURRENT, 0);
+                stockValues.put(Contract.QuoteEntry.COLUMN_ISCURRENT, 1);
 
                 cVVector.add(stockValues);
             }

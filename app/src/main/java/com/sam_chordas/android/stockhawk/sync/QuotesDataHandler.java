@@ -39,9 +39,10 @@ public class QuotesDataHandler {
 
     public int insertQuotes(Vector<ContentValues> cVVector, Uri contentUri) {
         int inserted = 0;
-        mContext.getContentResolver().delete(contentUri,
-                null,
-                null);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Contract.QuoteEntry.COLUMN_ISCURRENT, 0);
+        mContext.getContentResolver().update(Contract.QuoteEntry.CONTENT_URI, contentValues,
+                null, null);
 
         if ( cVVector != null && cVVector.size() > 0 ) {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
